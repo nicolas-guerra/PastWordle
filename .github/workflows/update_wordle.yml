@@ -4,6 +4,7 @@ on:
   schedule:
     # Schedule to run daily at 1:00 AM EST (6:00 AM UTC)
     - cron: "0 6 * * *"
+  workflow_dispatch: # Add this to enable manual runs
 
 jobs:
   update-wordle:
