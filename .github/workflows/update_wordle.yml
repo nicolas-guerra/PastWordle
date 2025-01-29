@@ -1,0 +1,39 @@
+name: Update Wordle Answers
+
+on:
+  schedule:
+    # Schedule to run daily at 1:00 AM EST (6:00 AM UTC)
+    - cron: "0 6 * * *"
+
+jobs:
+  update-wordle:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # Step 3: Install dependencies (if any)
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Step 4: Run the Python script
+      - name: Run Python script
+        run: python update_wordle.py
+
+      # Step 5: Commit and push changes
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "[email protected]"
+          git add wordle_answers.csv
+          git commit -m "Update Wordle answers [skip ci]" || echo "No changes to commit"
+          git push
