@@ -12,12 +12,11 @@ header {
     color: black;
     text-align: center;
     padding: 1rem 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Header shadow */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Header shadow */
 }
 
 header h1 {
     font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for hovering effect */
 }
 
 .container {
@@ -27,13 +26,14 @@ header h1 {
     max-width: 1200px;
 }
 
-/* Ad Spaces */
+/* Sidebar Ads */
 .ad-space {
     width: 20%;
-    background-color: #e0e0e0;
+    background-color: #f9f9f9;
     text-align: center;
     padding: 10px;
     border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sidebar shadow */
 }
 
 .left-ad {
@@ -49,35 +49,10 @@ main {
     flex-grow: 1;
 }
 
-.controls {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.controls button {
-    background-color: white; /* White background */
-    color: black; /* Black text */
-    border: 2px solid black; /* Black border */
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-
-    /* Add subtle shadow for hover effect */
-    box-shadow: none; 
-    transition: all 0.3s ease; /* Smooth hover transition */
-}
-
-.controls button:hover {
-    background-color: #f1f1f1; /* Light gray on hover */
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
-}
-
 /* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 
     /* Add shadow to make the table appear as if it's hovering */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -91,6 +66,11 @@ table th, table td {
 table th {
     background-color: white; /* White background for header */
     color: black; /* Black text for header */
+    cursor: pointer; /* Indicate clickable headers */
+}
+
+table th:hover {
+    background-color: #f1f1f1; /* Highlight header on hover */
 }
 
 table tr:nth-child(even) {
@@ -98,27 +78,22 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-    background-color: #f1f1f1; /* Highlight row on hover */
+    background-color: #eaeaea; /* Highlight row on hover */
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 10px 20px;
+/* Disclaimer Styles */
+.disclaimer {
+    font-size: small; /* Small text size for disclaimer */
+    color: gray; /* Subtle gray color */
+    text-align: center; /* Center the disclaimer */
+    margin-top: 20px; /* Add spacing above the disclaimer */
 }
 
-footer .disclaimer {
-   font-size: small; 
-   color: gray; 
-   margin-top: 5px; 
-   line-height: 1.5; 
-}
-
-footer .disclaimer a {
+.disclaimer a {
    color: blue; 
    text-decoration: underline; 
 }
 
-footer .disclaimer a:hover {
+.disclaimer a:hover {
    color: darkblue; 
 }

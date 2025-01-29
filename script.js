@@ -1,48 +1,66 @@
-// Load CSV data and populate the table
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("wordle_answers.csv")
-        .then(response => response.text())
-        .then(data => {
-            const rows = data.split("\n").slice(1); // Skip header row
-            const tableBody = document.querySelector("#wordle-table tbody");
+document.addEventListener('DOMContentLoaded', () => {
+    const table = document.getElementById('wordle-table');
+    const tbody = table.querySelector('tbody');
+
+    // Fetch and parse CSV data
+    fetch('wordle_answers.csv')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(csvText => {
+            const rows = csvText.split('\n').slice(1); // Skip header row
 
             rows.forEach(row => {
-                const cols = row.split(",");
-                if (cols.length === 4) { // Ensure valid row
-                    const tr = document.createElement("tr");
-
-                    // Add only "Number", "Answer", and "Date" columns
-                    [0, 2, 3].forEach(index => {
-                        const td = document.createElement("td");
-                        td.textContent = cols[index].trim();
-                        tr.appendChild(td);
-                    });
-
-                    tableBody.appendChild(tr);
+                const cols = row.split(',');
+                if (cols.length === 4) { // Ensure valid row structure
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${cols[0].trim()}</td>
+                        <td>${cols[2].trim()}</td>
+                        <td>${cols[3].trim()}</td>
+                    `;
+                    tbody.appendChild(tr);
                 }
             });
+        })
+        .catch(error => {
+            console.error('Error loading CSV:', error);
         });
 
     // Add sorting functionality
-    document.getElementById("sort-chronological").addEventListener("click", () => sortTable(0)); // Sort by "Number"
-    
-    document.getElementById("sort-alphabetical").addEventListener("click", () => sortTable(1)); // Sort by "Answer"
-});
+    const headers = table.querySelectorAll('th');
 
-// Function to sort the table
-function sortTable(columnIndex) {
-    const table = document.getElementById("wordle-table");
-    
-    let rows = Array.from(table.rows).slice(1); // Skip header row
-    rows.sort((a, b) => {
-        const cellA = a.cells[columnIndex].textContent.toLowerCase();
-        const cellB = b.cells[columnIndex].textContent.toLowerCase();
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const columnIndex = Array.from(headers).indexOf(header);
+            const order = header.getAttribute('data-order') === 'asc' ? 'desc' : 'asc';
+            header.setAttribute('data-order', order);
 
-        return cellA.localeCompare(cellB, undefined, { numeric: true });
+            const rows = Array.from(tbody.rows);
+
+            rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].textContent.trim();
+                const cellB = b.cells[columnIndex].textContent.trim();
+
+                if (!isNaN(cellA) && !isNaN(cellB)) { // Numeric sort
+                    return order === 'asc' ? cellA - cellB : cellB - cellA;
+                } else { // String sort
+                    return order === 'asc'
+                        ? cellA.localeCompare(cellB)
+                        : cellB.localeCompare(cellA);
+                }
+            });
+
+            // Update arrow direction in headers
+            headers.forEach(h => h.textContent = h.textContent.replace(/ ▲| ▼/g, ''));
+            header.textContent += order === 'asc' ? ' ▲' : ' ▼';
+
+            // Rebuild tbody with sorted rows
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        });
     });
-
-    // Append sorted rows back to the table body
-    const tbody = table.querySelector("tbody");
-    tbody.innerHTML = ""; // Clear existing rows
-    rows.forEach(row => tbody.appendChild(row));
-}
+});
