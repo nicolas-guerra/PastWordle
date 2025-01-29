@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #333;
+}
+
+header {
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Header shadow */
+}
+
+header h1 {
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for hovering effect */
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+/* Ad Spaces */
+.ad-space {
+    width: 20%;
+    background-color: #e0e0e0;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.left-ad {
+    margin-right: 10px;
+}
+
+.right-ad {
+    margin-left: 10px;
+}
+
+/* Main Content */
+main {
+    flex-grow: 1;
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    background-color: white; /* White background */
+    color: black; /* Black text */
+    border: 2px solid black; /* Black border */
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    /* Add subtle shadow for hover effect */
+    box-shadow: none; 
+    transition: all 0.3s ease; /* Smooth hover transition */
+}
+
+.controls button:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    /* Add shadow to make the table appear as if it's hovering */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: white; /* White background for header */
+    color: black; /* Black text for header */
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Subtle alternating row colors */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+footer .disclaimer {
+   font-size: small; 
+   color: gray; 
+   margin-top: 5px; 
+   line-height: 1.5; 
+}
+
+footer .disclaimer a {
+   color: blue; 
+   text-decoration: underline; 
+}
+
+footer .disclaimer a:hover {
+   color: darkblue; 
+}
