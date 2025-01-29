@@ -17,6 +17,7 @@ header {
 
 header h1 {
     font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow to header */
 }
 
 .container {
