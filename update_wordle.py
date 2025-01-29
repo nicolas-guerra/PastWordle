@@ -11,4 +11,4 @@ with urllib.request.urlopen(f"https://www.nytimes.com/svc/wordle/v2/{yesterday.y
         data = json.load(url)
         with open('wordle_answers.csv','a') as f:
             writer = csv.writer(f)
-            writer.writerow([data['days_since_launch'],data['id'],data['solution'],f"{yesterday.month}/{yesterday.day}/{yesterday.year}"])
+            writer.writerow([data['days_since_launch'],data['id'],data['solution'],data['print_date']])
