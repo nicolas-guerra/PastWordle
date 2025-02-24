@@ -11,23 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.text();
         })
         .then(csvText => {
-            let rows = csvText.split('\n').slice(1); // Skip header row
+            const rows = csvText.split('\n').slice(1); // Skip header row
 
-            // Parse and sort rows in descending order by the first column (Wordle number)
-            rows = rows
-                .map(row => row.split(','))
-                .filter(cols => cols.length === 4) // Ensure valid row structure
-                .sort((a, b) => Number(b[0].trim()) - Number(a[0].trim())); // Sort numerically in descending order
-
-            // Append sorted rows to the table
-            rows.forEach(cols => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${cols[0].trim()}</td>
-                    <td>${cols[2].trim()}</td>
-                    <td>${cols[3].trim()}</td>
-                `;
-                tbody.appendChild(tr);
+            rows.forEach(row => {
+                const cols = row.split(',');
+                if (cols.length === 4) { // Ensure valid row structure
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${cols[0].trim()}</td>
+                        <td>${cols[2].trim()}</td>
+                        <td>${cols[3].trim()}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
             });
         })
         .catch(error => {
@@ -59,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Update arrow direction in headers
-            headers.forEach(h => h.textContent = h.textContent.replace(/ ▼| ▲/g, ''));
+            headers.forEach(h => h.textContent = h.textContent.replace(/ ▲| ▼/g, ''));
             header.textContent += order === 'asc' ? ' ▲' : ' ▼';
 
             // Rebuild tbody with sorted rows
