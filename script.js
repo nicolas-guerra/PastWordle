@@ -50,16 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cellB = b.cells[columnIndex].textContent.trim();
 
                 if (!isNaN(cellA) && !isNaN(cellB)) { // Numeric sort
-                    return order === 'desc' ? cellA - cellB : cellB - cellA;
+                    return order === 'asc' ? cellA - cellB : cellB - cellA;
                 } else { // String sort
-                    return order === 'desc'
+                    return order === 'asc'
                         ? cellA.localeCompare(cellB)
                         : cellB.localeCompare(cellA);
                 }
             });
 
             // Update arrow direction in headers
-            headers.forEach(h => h.textContent = h.textContent.replace(/ ▲| ▼/g, ''));
+            headers.forEach(h => h.textContent = h.textContent.replace(/ ▼| ▲/g, ''));
             header.textContent += order === 'asc' ? ' ▲' : ' ▼';
 
             // Rebuild tbody with sorted rows
