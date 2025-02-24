@@ -29,11 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 tbody.appendChild(tr);
             });
-
-            // Set initial sorting state for the first column (Wordle number)
-            const firstHeader = table.querySelector('th');
-            firstHeader.setAttribute('data-order', 'desc');
-            firstHeader.textContent += ' ▼'; // Indicate initial descending order
         })
         .catch(error => {
             console.error('Error loading CSV:', error);
