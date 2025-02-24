@@ -50,9 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cellB = b.cells[columnIndex].textContent.trim();
 
                 if (!isNaN(cellA) && !isNaN(cellB)) { // Numeric sort
-                    return order === 'asc' ? cellA - cellB : cellB - cellA;
+                    return order === 'desc' ? cellA - cellB : cellB - cellA;
                 } else { // String sort
-                    return order === 'asc'
+                    return order === 'desc'
                         ? cellA.localeCompare(cellB)
                         : cellB.localeCompare(cellA);
                 }
