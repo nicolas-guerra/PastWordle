@@ -10,21 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return response.text();
         })
-        .then(csvText => {
-            const rows = csvText.split('\n').slice(1); // Skip header row
+                .then(csvText => {
+            let rows = csvText.split('\n').slice(1); // Skip header row
 
-            rows.forEach(row => {
-                const cols = row.split(',');
-                if (cols.length === 4) { // Ensure valid row structure
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${cols[0].trim()}</td>
-                        <td>${cols[2].trim()}</td>
-                        <td>${cols[3].trim()}</td>
-                    `;
-                    tbody.appendChild(tr);
-                }
+            // Parse and sort rows in descending order by the first column (Wordle number)
+            rows = rows
+                .map(row => row.split(','))
+                .filter(cols => cols.length === 4) // Ensure valid row structure
+                .sort((a, b) => Number(b[0].trim()) - Number(a[0].trim())); // Sort numerically in descending order
+
+            // Append sorted rows to the table
+            rows.forEach(cols => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${cols[0].trim()}</td>
+                    <td>${cols[2].trim()}</td>
+                    <td>${cols[3].trim()}</td>
+                `;
+                tbody.appendChild(tr);
             });
+
+            // Set initial sorting state for the first column (Wordle number)
+            const firstHeader = table.querySelector('th');
+            firstHeader.setAttribute('data-order', 'desc');
+            firstHeader.textContent += ' ▼'; // Indicate initial descending order
         })
         .catch(error => {
             console.error('Error loading CSV:', error);
