@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       layout.forEach((line, i) => {
         const row = document.createElement('div');
         row.className = 'keyboard-row';
-        if (i === 2) row.appendChild(createKey('ENTER', onEnter));
+        if (i === 2) row.appendChild(createKey('ENT', onEnter));
         line.split('').forEach(l => row.appendChild(createKey(l, () => onKey(l))));
         if (i === 2) row.appendChild(createKey('DEL', onDel));
         keyboard.appendChild(row);
