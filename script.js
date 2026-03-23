@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const table = document.getElementById('wordle-table');
     const tbody = table.querySelector('tbody');
+    const searchInput = document.getElementById('word-search');
+
+    function applySearchFilter() {
+        const query = (searchInput?.value || '').trim().toLowerCase();
+        const rows = Array.from(tbody.rows);
+
+        rows.forEach(row => {
+            const answerText = row.cells[1].textContent.trim().toLowerCase();
+            row.style.display = answerText.includes(query) ? '' : 'none';
+        });
+    }
 
     // Fetch and parse CSV data
     fetch('wordle_answers.csv')
@@ -34,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const firstHeader = table.querySelector('th');
             firstHeader.setAttribute('data-order', 'desc');
             firstHeader.textContent += ' ▼'; // Indicate initial descending order
+
+            // Keep results filtered after data is loaded.
+            applySearchFilter();
         })
         .catch(error => {
             console.error('Error loading CSV:', error);
@@ -70,6 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Rebuild tbody with sorted rows
             tbody.innerHTML = '';
             rows.forEach(row => tbody.appendChild(row));
+
+            // Keep current filter applied after sorting.
+            applySearchFilter();
         });
     });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', applySearchFilter);
+    }
 });

@@ -26,24 +26,32 @@
             <a href="game.html">▶ Play free fan-made game</a>
         </nav>
 	<p>No spoilers for today's Wordle! Tap a column header to sort the table by that column.</p>
+        <a class="coffee-btn" href="https://ko-fi.com/nico314" target="_blank" rel="noopener noreferrer">Buy me a coffee? ☕</a>
     </header>
 
     <div class="container">
 
         <!-- Main Content -->
         <main>
-            <table id="wordle-table">
-                <thead>
-                    <tr>
-                        <th data-column="Number" data-order="desc">Number</th>
-                        <th data-column="Answer" data-order="desc">Answer</th>
-                        <th data-column="Date" data-order="desc">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Rows will be dynamically populated -->
-                </tbody>
-            </table>
+            <div class="search-row">
+                <label for="word-search">Find &#128269;:</label>
+                <input id="word-search" type="text" placeholder="Type letters to filter answers">
+            </div>
+
+            <div class="table-wrap">
+                <table id="wordle-table">
+                    <thead>
+                        <tr>
+                            <th data-column="Number" data-order="desc">Number</th>
+                            <th data-column="Answer" data-order="desc">Answer</th>
+                            <th data-column="Date" data-order="desc">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
 
             <!-- Disclaimer -->
             <p class="disclaimer">
